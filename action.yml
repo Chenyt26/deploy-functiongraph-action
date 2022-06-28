@@ -1,16 +1,29 @@
-# action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'HuaweiCloud Functiongraph Deploy'
+description: 'deploy function to huaweicloud'
+author: 'wenchui'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  ak: 
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    description: 'huaweicloud AK'
+  sk: 
+    required: true
+    description: 'huaweicloud SK'
+  endpoint: 
+    required: true
+    description: 'huaweicloud functiongraph endpoint'
+    default: 'https://functiongraph.cn-north-4.myhuaweicloud.com'
+  project_id: 
+    required: true
+    description: 'huaweicloud project_id'
+  function_urn: 
+    required: true
+    description: 'huaweicloud functiongraph urn address'
+  function_codetype: 
+    required: true
+    description:"support obs,zip,jar,file,dir"
+  function_file: 
+    required: true
+    description: 'obs url,local java jar path,local zip file path,local function file path,local directory path'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.who-to-greet }}
+  using: 'node16'
+  main: 'dist/index.js'
